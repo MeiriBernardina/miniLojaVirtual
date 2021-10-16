@@ -1,0 +1,152 @@
+<html>
+
+<head>
+    <title>Loja Virtual</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+        #produtos,
+        #carrinho {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: flex;
+        }
+
+        #carrinho {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: block;
+        }
+
+        .produto-single {
+            width: 33.3%;
+            padding: 0 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+   
+    <nav class="navbar navbar-expand-lg" style="background-color: 	#CCCCFF;">
+        <div class="container-fluid">
+            <img src="img/coracaoTupper.jpg" class="d-block w-10" alt="...">
+
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <h2>TupperStore</h2>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="cadastro.html">Cadastro</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="sobrenos.html">Sobre Nós</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="contato.html">Contato</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  
+
+   
+    <div id="produtos">
+
+    </div>
+    <!--produtos-->
+
+    <h2>Carrinho:</h2>
+    <div id="carrinho">
+
+    </div>
+    <!--Carrinho-->
+    <script>
+        const itens = [
+            {
+                id: 0,
+                nome: 'EcoTupper',
+                img: 'img/ecotupper.jpg',
+                quantidade: 0,
+            },
+            {
+                id: 1,
+                nome: 'Tigelas Murano',
+                img:'img/murano.jpg',
+                quantidade: 0,
+            },
+            {
+                id: 2,
+                nome: 'Porta Tudo 10L',
+                img: 'img/porta tudo.jpg',
+                quantidade: 0,
+            },
+        ]
+
+        inicializarLoja = () => {
+            var containerProdutos = document.getElementById('produtos');
+            itens.map((val) => {
+                containerProdutos.innerHTML += `
+
+                <div class = "produto-single">
+                    <img src="`+ val.img + `" />
+                    <p> `+ val.nome + `</p>
+                    <a key="`+ val.id + `" href="#"> Adicionar ao carrinho <a/>
+                </div>
+                `;
+            })
+        }
+
+
+        inicializarLoja();
+
+        atualizarCarrinho = () => {
+            var containerCarrinho = document.getElementById('carrinho');
+            containerCarrinho.innerHTML = "";
+            itens.map((val) => {
+                if (val.quantidade > 0) {
+                    containerCarrinho.innerHTML += `
+
+                    <p> `+ val.nome + ` | quantidade: ` + val.quantidade + `</p>
+                    <hr>
+               
+
+                `;
+                }
+            })
+        }
+
+
+        var links = document.getElementsByTagName('a');
+
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function () {
+                let key = this.getAttribute('key');
+                itens[key].quantidade++;
+                atualizarCarrinho();
+                return false;
+            })
+        }
+
+
+    </script>
+  </div>
+
+</body>
+
+</html>
